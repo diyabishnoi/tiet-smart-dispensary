@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - TIET Smart Dispensary</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: #c4121c;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Main container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            color: #c4121c;
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Appointment box */
+        .appointment-box {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid #c4121c;
+        }
+
+        .appointment-box h2 {
+            color: #c4121c;
+            margin-top: 0;
+        }
+
+        /* Form */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #c4121c;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .button {
+            margin-top: 30px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #c4121c;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #a80f17;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #c4121c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Doctors */
+        .doctors {
+            margin-top: 35px;
+        }
+
+        .doctor-card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #c4121c;
+        }
+
+        .doctor-card h3 {
+            margin: 0 0 8px;
+            color: #c4121c;
+        }
+
+        .doctor-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        @media (max-width: 700px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 18px 5%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">🏥 TIET Smart Dispensary</div>
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+
+        <h1 class="page-title">Book an Appointment</h1>
+
+        <p class="subtitle">
+            Schedule an appointment with a TIET dispensary doctor.
+        </p>
+
+        <div class="appointment-box">
+
+            <h2>Appointment Details</h2>
+
+            <form method="POST" action="/appointments">
+
+                <label for="doctor">
+                    Select Doctor
+                </label>
+
+                <select id="doctor" name="doctor" required>
+
+                    <option value="">
+                        -- Select a doctor --
+                    </option>
+
+                    <option value="Dr. Ajay Gupta">
+                        Dr. Ajay Gupta - Medical Officer (Pediatrics)
+                    </option>
+
+                    <option value="Dr. Harjit Singh">
+                        Dr. Harjit Singh - Medical Officer
+                    </option>
+
+                    <option value="Dr. Jeevan Jot Singh">
+                        Dr. Jeevan Jot Singh - Medical Officer
+                    </option>
+
+                    <option value="Dr. Mahroosh Nasir">
+                        Dr. Mahroosh Nasir - Medical Officer
+                    </option>
+
+                    <option value="Dr. Ritu Bassi">
+                        Dr. Ritu Bassi - Senior Medical Officer
+                    </option>
+
+                    <option value="Dr. Sarabjeet Kaur">
+                        Dr. Sarabjeet Kaur - Medical Officer
+                    </option>
+
+                </select>
+
+                <div class="row">
+
+                    <div>
+                        <label for="date">
+                            Appointment Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="time">
+                            Appointment Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="time"
+                            name="time"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <label for="reason">
+                    Reason for Visit
+                </label>
+
+                <input
+                    type="text"
+                    id="reason"
+                    name="reason"
+                    placeholder="e.g. Fever, headache, general check-up"
+                    required
+                >
+
+                <button type="submit" class="button">
+                    📅 Confirm Appointment
+                </button>
+
+            </form>
+
+            <a href="/dashboard" class="back">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+        <!-- Doctors -->
+        <div class="doctors">
+
+            <h2 style="color:#c4121c;">
+                Available Doctors
+            </h2>
+
+            <div class="doctor-card">
+                <h3>Dr. Ajay Gupta</h3>
+                <p>Medical Officer (Pediatrics)</p>
+                <p>M.B.B.S, M.D (Pediatrics)</p>
+            </div>
+
+            <div class="doctor-card">
+                <h3>Dr. Harjit Singh</h3>
+                <p>Medical Officer</p>
+                <p>M.B.B.S</p>
+            </div>
+
+            <div class="doctor-card">
+                <h3>Dr. Jeevan Jot Singh</h3>
+                <p>Medical Officer</p>
+                <p>M.B.B.S</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

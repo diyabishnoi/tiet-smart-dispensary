@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicine Availability | TIET Smart Dispensary</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #c4121c;
+            color: white;
+            padding: 20px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            text-decoration: underline;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1300px;
+            margin: 50px auto;
+        }
+
+        .page-title {
+            color: #c4121c;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 19px;
+            margin-bottom: 35px;
+        }
+
+
+        /* SEARCH */
+
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+
+            border-top: 5px solid #c4121c;
+
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+            margin-bottom: 30px;
+        }
+
+        .search-box label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+
+            border: 1px solid #ccc;
+            border-radius: 7px;
+
+            font-size: 17px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #c4121c;
+        }
+
+
+        /* MEDICINE TABLE */
+
+        .medicine-card {
+            background: white;
+
+            border-radius: 15px;
+
+            border-top: 6px solid #c4121c;
+
+            padding: 30px;
+
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+
+            overflow-x: auto;
+        }
+
+        .medicine-card h2 {
+            color: #c4121c;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #c4121c;
+            color: white;
+
+            padding: 17px;
+
+            text-align: left;
+
+            font-size: 17px;
+        }
+
+        td {
+            padding: 18px 17px;
+
+            border-bottom: 1px solid #eee;
+
+            font-size: 16px;
+        }
+
+        tr:hover {
+            background: #fff8f8;
+        }
+
+
+        /* STATUS */
+
+        .available {
+            display: inline-block;
+
+            background: #e7f7ec;
+            color: #218838;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+        }
+
+        .out-of-stock {
+            display: inline-block;
+
+            background: #fde8e8;
+            color: #c4121c;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            color: #c4121c;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 70px;
+
+            background: #c4121c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 15px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 18px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 30px;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .medicine-card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            🏥 TIET Smart Dispensary
+        </div>
+
+        <a href="/logout" class="logout">
+            Logout
+        </a>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <h1 class="page-title">
+            Medicine Availability
+        </h1>
+
+        <p class="subtitle">
+            Check the availability of medicines at the TIET campus dispensary.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <label for="medicineSearch">
+                🔍 Search Medicine
+            </label>
+
+            <input
+                type="text"
+                id="medicineSearch"
+                placeholder="Search by medicine name or category..."
+                onkeyup="searchMedicine()"
+            >
+
+        </div>
+
+
+        <!-- MEDICINE TABLE -->
+
+        <div class="medicine-card">
+
+            <h2>
+                💊 Available Medicines
+            </h2>
+
+
+            <table id="medicineTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Medicine
+                        </th>
+
+                        <th>
+                            Category
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Availability
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for medicine in medicines %}
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                {{ medicine.name }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            {{ medicine.category }}
+                        </td>
+
+                        <td>
+                            {{ medicine.quantity }}
+                        </td>
+
+                        <td>
+
+                            {% if medicine.quantity > 0 %}
+
+                            <span class="available">
+                                ✓ Available
+                            </span>
+
+                            {% else %}
+
+                            <span class="out-of-stock">
+                                ✕ Out of Stock
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <a href="/dashboard" class="back">
+            ← Back to Dashboard
+        </a>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 TIET Smart Dispensary
+        </p>
+
+        <p>
+            Smart Healthcare Management System for TIET Students
+        </p>
+
+    </footer>
+
+
+    <!-- SEARCH JAVASCRIPT -->
+
+    <script>
+
+        function searchMedicine() {
+
+            let input =
+                document.getElementById("medicineSearch")
+                .value
+                .toLowerCase();
+
+            let rows =
+                document
+                .getElementById("medicineTable")
+                .getElementsByTagName("tr");
+
+
+            for (let i = 1; i < rows.length; i++) {
+
+                let text =
+                    rows[i].innerText.toLowerCase();
+
+                if (text.includes(input)) {
+
+                    rows[i].style.display = "";
+
+                } else {
+
+                    rows[i].style.display = "none";
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

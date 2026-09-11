@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TIET Smart Dispensary</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f8f8;
+            color: #222;
+        }
+
+
+        /* =========================
+           NAVIGATION BAR
+        ========================= */
+
+        nav {
+            background: #b5121b;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            min-height: 72vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 70px 10%;
+
+            background: white;
+        }
+
+
+        .hero-text {
+            max-width: 620px;
+        }
+
+
+        .hero-text h1 {
+            font-size: 52px;
+            color: #b5121b;
+            margin-bottom: 18px;
+        }
+
+
+        .hero-text h2 {
+            font-size: 25px;
+            font-weight: normal;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            display: inline-block;
+
+            background: #b5121b;
+            color: white;
+
+            padding: 14px 32px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .login-btn:hover {
+            background: #8f0e16;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           MEDICAL CARD
+        ========================= */
+
+        .medical-card {
+
+            width: 350px;
+
+            background: white;
+
+            padding: 45px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            border: 2px solid #eeeeee;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+
+        .medical-icon {
+            font-size: 75px;
+            margin-bottom: 20px;
+        }
+
+
+        .medical-card h3 {
+            font-size: 25px;
+            color: #b5121b;
+            margin-bottom: 12px;
+        }
+
+
+        .medical-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           RED DIVIDER
+        ========================= */
+
+        .red-line {
+            width: 80px;
+            height: 4px;
+
+            background: #b5121b;
+
+            margin: 20px 0;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+
+            padding: 65px 10%;
+
+            background: #f8f8f8;
+
+            text-align: center;
+        }
+
+
+        .features h2 {
+
+            font-size: 34px;
+
+            color: #b5121b;
+
+            margin-bottom: 45px;
+        }
+
+
+        .feature-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .feature {
+
+            width: 270px;
+
+            padding: 35px 25px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            border-top: 4px solid #b5121b;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .feature:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+
+        .feature-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .feature h3 {
+
+            color: #b5121b;
+
+            margin-bottom: 12px;
+
+            font-size: 20px;
+        }
+
+
+        .feature p {
+
+            color: #666;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #b5121b;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 22px;
+        }
+
+
+        footer p {
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 18px 25px;
+            }
+
+            nav a {
+                margin-left: 10px;
+            }
+
+            .hero {
+
+                flex-direction: column;
+
+                text-align: center;
+
+                gap: 45px;
+
+                padding: 50px 25px;
+            }
+
+            .hero-text h1 {
+                font-size: 40px;
+            }
+
+            .red-line {
+                margin: 20px auto;
+            }
+
+            .medical-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav>
+
+        <div class="logo">
+            🏥 TIET Smart Dispensary
+        </div>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="#">About</a>
+
+            <a href="#">Contact</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero">
+
+
+        <div class="hero-text">
+
+            <h1>
+                TIET Smart Dispensary
+            </h1>
+
+            <div class="red-line"></div>
+
+            <h2>
+                Smart Healthcare Management
+                for TIET Students
+            </h2>
+
+            <p>
+
+                A digital healthcare and dispensary
+                management system designed to make
+                student healthcare services faster,
+                simpler and more efficient.
+
+            </p>
+
+
+            <a href="/login" class="login-btn">
+                Login to Dispensary
+            </a>
+
+        </div>
+
+
+
+        <!-- Medical Card -->
+
+        <div class="medical-card">
+
+            <div class="medical-icon">
+                💊
+            </div>
+
+            <h3>
+                Smart Healthcare
+            </h3>
+
+            <p>
+
+                Manage medicines, prescriptions,
+                student healthcare information and
+                dispensary services through one
+                centralized platform.
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features">
+
+        <h2>
+            Our Services
+        </h2>
+
+
+        <div class="feature-container">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    💊
+                </div>
+
+                <h3>
+                    Medicine Management
+                </h3>
+
+                <p>
+                    Track medicines, stock levels
+                    and availability efficiently.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👨‍⚕️
+                </div>
+
+                <h3>
+                    Student Healthcare
+                </h3>
+
+                <p>
+                    Maintain organized healthcare
+                    information for TIET students.
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Prescriptions
+                </h3>
+
+                <p>
+                    Manage prescriptions and medicine
+                    dispensing efficiently.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 TIET Smart Dispensary |
+            Thapar Institute of Engineering and Technology
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

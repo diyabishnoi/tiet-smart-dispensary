@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Appointment Confirmed | TIET Smart Dispensary</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #c4121c;
+            color: white;
+            padding: 20px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+        }
+
+        /* SUCCESS CARD */
+
+        .success-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            border-top: 6px solid #c4121c;
+
+            padding: 45px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 25px rgba(0,0,0,0.10);
+        }
+
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #c4121c;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        /* DETAILS */
+
+        .details {
+
+            text-align: left;
+
+            background: #fff7f7;
+
+            border: 1px solid #f0cccc;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+        }
+
+        .details h2 {
+
+            color: #c4121c;
+
+            margin-top: 0;
+
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .value {
+            color: #555;
+            text-align: right;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+
+            display: inline-block;
+
+            padding: 14px 25px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+        .primary {
+
+            background: #c4121c;
+
+            color: white;
+        }
+
+        .primary:hover {
+
+            background: #a80f17;
+        }
+
+        .secondary {
+
+            border: 2px solid #c4121c;
+
+            color: #c4121c;
+
+            background: white;
+        }
+
+        .secondary:hover {
+
+            background: #fff5f5;
+        }
+
+        /* FOOTER */
+
+        .footer {
+
+            margin-top: 60px;
+
+            background: #c4121c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 15px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 30px;
+            }
+
+            .success-card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .value {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            🏥 TIET Smart Dispensary
+        </div>
+
+        <a href="/logout"
+           class="logout">
+
+            Logout
+
+        </a>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Appointment Confirmed!
+            </h1>
+
+
+            <p class="subtitle">
+
+                Your appointment with the TIET Dispensary
+                has been successfully booked.
+
+            </p>
+
+
+
+            <!-- APPOINTMENT DETAILS -->
+
+            <div class="details">
+
+                <h2>
+                    📅 Appointment Details
+                </h2>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Doctor
+                    </span>
+
+                    <span class="value">
+                        {{ doctor }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Date
+                    </span>
+
+                    <span class="value">
+                        {{ date }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Time
+                    </span>
+
+                    <span class="value">
+                        {{ time }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Reason for Visit
+                    </span>
+
+                    <span class="value">
+                        {{ reason }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a href="/dashboard"
+                   class="button primary">
+
+                    ← Back to Dashboard
+
+                </a>
+
+
+                <a href="/history"
+                   class="button secondary">
+
+                    View Appointment History
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 TIET Smart Dispensary
+        </p>
+
+        <p>
+            Smart Healthcare Management System
+            for TIET Students
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

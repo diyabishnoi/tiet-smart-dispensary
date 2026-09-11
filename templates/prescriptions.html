@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Prescriptions - TIET Smart Dispensary</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* ---------------- HEADER ---------------- */
+
+        .header {
+            background: #c4121c;
+            color: white;
+            height: 92px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ---------------- MAIN ---------------- */
+
+        .container {
+            width: 90%;
+            max-width: 1380px;
+            margin: 50px auto;
+        }
+
+        .page-title {
+            color: #c4121c;
+            font-size: 46px;
+            margin-bottom: 10px;
+        }
+
+        .page-description {
+            font-size: 22px;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+
+        /* ---------------- PRESCRIPTION CARD ---------------- */
+
+        .prescription-box {
+            background: white;
+            border-radius: 20px;
+            border-top: 7px solid #c4121c;
+            padding: 35px 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            margin-bottom: 35px;
+        }
+
+        .prescription-heading {
+            color: #c4121c;
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+
+        /* ---------------- TABLE ---------------- */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+
+        th {
+            background: #c4121c;
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-size: 19px;
+        }
+
+        td {
+            padding: 20px 18px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: #fff7f7;
+        }
+
+
+        /* ---------------- STATUS ---------------- */
+
+        .status {
+            display: inline-block;
+            padding: 9px 18px;
+            border-radius: 25px;
+            background: #e6f6eb;
+            color: #218838;
+            font-weight: bold;
+        }
+
+
+        /* ---------------- VIEW BUTTON ---------------- */
+
+        .view-button {
+            background: #c4121c;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 11px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            background: #a80f17;
+        }
+
+
+        /* ---------------- DETAILS ---------------- */
+
+        .details {
+            display: none;
+            background: #fff8f8;
+            border-left: 5px solid #c4121c;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .details h3 {
+            color: #c4121c;
+            margin-top: 0;
+        }
+
+        .details p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin: 8px 0;
+        }
+
+        .medicine-list {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .medicine-list li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+
+        /* ---------------- BACK BUTTON ---------------- */
+
+        .back {
+            display: inline-block;
+            color: #c4121c;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ---------------- FOOTER ---------------- */
+
+        .footer {
+            background: #c4121c;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+
+        /* ---------------- MOBILE ---------------- */
+
+        @media (max-width: 800px) {
+
+            .header {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .page-title {
+                font-size: 34px;
+            }
+
+            .page-description {
+                font-size: 18px;
+            }
+
+            .prescription-box {
+                padding: 25px 20px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 850px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            🏥 TIET Smart Dispensary
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout">
+            Logout
+        </a>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <h1 class="page-title">
+            💊 My Prescriptions
+        </h1>
+
+        <p class="page-description">
+            View your current and previous prescriptions from the TIET dispensary.
+        </p>
+
+
+        <!-- ================= PRESCRIPTION 1 ================= -->
+
+        <section class="prescription-box">
+
+            <h2 class="prescription-heading">
+                📋 Prescription History
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Prescription ID</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Diagnosis</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>RX-1001</td>
+
+                        <td>
+                            Dr. Ajay Gupta
+                        </td>
+
+                        <td>
+                            11 Sep 2026
+                        </td>
+
+                        <td>
+                            Fever & Cold
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Active
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="toggleDetails('details1')">
+
+                                View Details
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- DETAILS -->
+
+            <div id="details1" class="details">
+
+                <h3>
+                    Prescription RX-1001
+                </h3>
+
+                <p>
+                    <strong>Doctor:</strong>
+                    Dr. Ajay Gupta
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    11 September 2026
+                </p>
+
+                <p>
+                    <strong>Diagnosis:</strong>
+                    Fever & Cold
+                </p>
+
+                <p>
+                    <strong>Medicines:</strong>
+                </p>
+
+                <ul class="medicine-list">
+
+                    <li>
+                        Paracetamol — 500 mg — Twice a day after meals
+                    </li>
+
+                    <li>
+                        Cetirizine — 10 mg — Once at night
+                    </li>
+
+                    <li>
+                        ORS — As required for hydration
+                    </li>
+
+                </ul>
+
+                <p>
+                    <strong>Doctor's Instructions:</strong>
+                    Take medicines regularly and maintain adequate hydration.
+                    Visit the dispensary again if symptoms persist.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PREVIOUS PRESCRIPTION ================= -->
+
+        <section class="prescription-box">
+
+            <h2 class="prescription-heading">
+                📜 Previous Prescription
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Prescription ID</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Diagnosis</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>RX-0987</td>
+
+                        <td>
+                            Dr. Harjit Singh
+                        </td>
+
+                        <td>
+                            20 Aug 2026
+                        </td>
+
+                        <td>
+                            Headache
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Completed
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="view-button"
+                                onclick="toggleDetails('details2')">
+
+                                View Details
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <!-- DETAILS -->
+
+            <div id="details2" class="details">
+
+                <h3>
+                    Prescription RX-0987
+                </h3>
+
+                <p>
+                    <strong>Doctor:</strong>
+                    Dr. Harjit Singh
+                </p>
+
+                <p>
+                    <strong>Date:</strong>
+                    20 August 2026
+                </p>
+
+                <p>
+                    <strong>Diagnosis:</strong>
+                    Headache
+                </p>
+
+                <p>
+                    <strong>Medicines:</strong>
+                </p>
+
+                <ul class="medicine-list">
+
+                    <li>
+                        Paracetamol — 500 mg — As required
+                    </li>
+
+                </ul>
+
+                <p>
+                    <strong>Doctor's Instructions:</strong>
+                    Take adequate rest and drink sufficient water.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BACK ================= -->
+
+        <a href="{{ url_for('dashboard') }}" class="back">
+            ← Back to Dashboard
+        </a>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 TIET Smart Dispensary
+        </p>
+
+        <p>
+            Smart Healthcare Management System for TIET Students
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function toggleDetails(id) {
+
+            const element = document.getElementById(id);
+
+            if (element.style.display === "block") {
+
+                element.style.display = "none";
+
+            } else {
+
+                element.style.display = "block";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

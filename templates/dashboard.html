@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Student Dashboard | TIET Smart Dispensary
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        /* ----------------------------------
+           HEADER
+        ---------------------------------- */
+
+        .header {
+            background: #c4121c;
+            color: white;
+
+            padding: 20px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+
+            padding: 10px 18px;
+
+            border-radius: 6px;
+
+            transition: 0.2s;
+        }
+
+        .logout:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+
+        /* ----------------------------------
+           MAIN CONTAINER
+        ---------------------------------- */
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+
+            margin: 45px auto;
+        }
+
+
+        /* ----------------------------------
+           WELCOME BOX
+        ---------------------------------- */
+
+        .welcome {
+
+            background: white;
+
+            padding: 35px 40px;
+
+            border-radius: 15px;
+
+            border-left: 7px solid #c4121c;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+            margin-bottom: 40px;
+        }
+
+        .welcome h1 {
+
+            margin: 0;
+
+            color: #c4121c;
+
+            font-size: 38px;
+        }
+
+        .welcome p {
+
+            font-size: 19px;
+
+            color: #666;
+
+            margin-top: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ----------------------------------
+           SECTION TITLE
+        ---------------------------------- */
+
+        .section-title {
+
+            text-align: center;
+
+            color: #c4121c;
+
+            font-size: 34px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ----------------------------------
+           CARDS GRID
+        ---------------------------------- */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 28px;
+        }
+
+
+        /* ----------------------------------
+           CARD
+        ---------------------------------- */
+
+        .card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            border-top: 6px solid #c4121c;
+
+            min-height: 350px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.12);
+        }
+
+
+        /* ----------------------------------
+           ICON
+        ---------------------------------- */
+
+        .icon {
+
+            font-size: 55px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ----------------------------------
+           CARD TITLE
+        ---------------------------------- */
+
+        .card h2 {
+
+            color: #c4121c;
+
+            font-size: 27px;
+
+            margin: 0 0 15px;
+        }
+
+
+        /* ----------------------------------
+           CARD DESCRIPTION
+        ---------------------------------- */
+
+        .card p {
+
+            color: #666;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ----------------------------------
+           BUTTON
+        ---------------------------------- */
+
+        .button {
+
+            margin-top: auto;
+
+            display: inline-block;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            background: #c4121c;
+
+            color: white;
+
+            padding: 14px 20px;
+
+            border-radius: 7px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .button:hover {
+
+            background: #a80f17;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ----------------------------------
+           QUICK LINKS
+        ---------------------------------- */
+
+        .quick-links {
+
+            margin-top: 45px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .quick-links h2 {
+
+            color: #c4121c;
+
+            margin-top: 0;
+        }
+
+        .quick-links a {
+
+            color: #c4121c;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            margin-right: 25px;
+        }
+
+
+        /* ----------------------------------
+           FOOTER
+        ---------------------------------- */
+
+        .footer {
+
+            margin-top: 60px;
+
+            background: #c4121c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 15px;
+        }
+
+
+        /* ----------------------------------
+           TABLET
+        ---------------------------------- */
+
+        @media (max-width: 1100px) {
+
+            .cards {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* ----------------------------------
+           MOBILE
+        ---------------------------------- */
+
+        @media (max-width: 650px) {
+
+            .header {
+
+                padding: 18px 5%;
+            }
+
+            .logo {
+
+                font-size: 21px;
+            }
+
+            .logout {
+
+                font-size: 16px;
+            }
+
+            .container {
+
+                width: 92%;
+
+                margin-top: 30px;
+            }
+
+            .welcome {
+
+                padding: 25px;
+            }
+
+            .welcome h1 {
+
+                font-size: 30px;
+            }
+
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            🏥 TIET Smart Dispensary
+
+        </div>
+
+
+        <a href="/logout" class="logout">
+
+            Logout
+
+        </a>
+
+    </header>
+
+
+
+    <!-- ======================================
+         MAIN
+    ======================================= -->
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h1>
+
+                Welcome, TIET Student 👋
+
+            </h1>
+
+
+            <p>
+
+                Welcome to your Smart Dispensary Dashboard.
+
+                What would you like to do today?
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Student ID:
+                </strong>
+
+                {{ student_id }}
+
+            </p>
+
+        </section>
+
+
+
+        <!-- ==================================
+             SERVICES
+        =================================== -->
+
+        <h2 class="section-title">
+
+            Our Services
+
+        </h2>
+
+
+        <section class="cards">
+
+
+            <!-- ==================================
+                 BOOK APPOINTMENT
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    🩺
+
+                </div>
+
+
+                <h2>
+
+                    Book Appointment
+
+                </h2>
+
+
+                <p>
+
+                    Schedule an appointment with
+                    a TIET dispensary doctor.
+
+                </p>
+
+
+                <a href="/appointments"
+                   class="button">
+
+                    Book Now
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 MEDICINE
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    💊
+
+                </div>
+
+
+                <h2>
+
+                    Medicine Availability
+
+                </h2>
+
+
+                <p>
+
+                    Check whether the medicine
+                    you need is currently available
+                    at the dispensary.
+
+                </p>
+
+
+                <a href="/medicines"
+                   class="button">
+
+                    Check Medicines
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 PRESCRIPTIONS
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    📋
+
+                </div>
+
+
+                <h2>
+
+                    My Prescriptions
+
+                </h2>
+
+
+                <p>
+
+                    View your prescriptions and
+                    previous medical records.
+
+                </p>
+
+
+                <a href="/prescriptions"
+                   class="button">
+
+                    View Prescriptions
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 APPOINTMENT HISTORY
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    📅
+
+                </div>
+
+
+                <h2>
+
+                    Appointment History
+
+                </h2>
+
+
+                <p>
+
+                    View your upcoming and previous
+                    dispensary appointments.
+
+                </p>
+
+
+                <a href="/history"
+                   class="button">
+
+                    View History
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 TALK TO DOCTOR
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    👨‍⚕️
+
+                </div>
+
+
+                <h2>
+
+                    Talk to a Doctor
+
+                </h2>
+
+
+                <p>
+
+                    Consult with a campus doctor
+                    regarding your health concerns.
+
+                </p>
+
+
+                <a href="/consult"
+                   class="button">
+
+                    Consult Doctor
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 EMERGENCY
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    🚨
+
+                </div>
+
+
+                <h2>
+
+                    Emergency
+
+                </h2>
+
+
+                <p>
+
+                    Get important emergency
+                    healthcare information and
+                    campus assistance.
+
+                </p>
+
+
+                <a href="/emergency"
+                   class="button">
+
+                    Emergency Help
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 HEALTH RECORDS
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    ❤️
+
+                </div>
+
+
+                <h2>
+
+                    Health Records
+
+                </h2>
+
+
+                <p>
+
+                    Access your personal health
+                    information and medical records.
+
+                </p>
+
+
+                <a href="/prescriptions"
+                   class="button">
+
+                    View Records
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 AI ASSISTANT
+            =================================== -->
+
+            <div class="card">
+
+                <div class="icon">
+
+                    🤖
+
+                </div>
+
+
+                <h2>
+
+                    AI Health Assistant
+
+                </h2>
+
+
+                <p>
+
+                    Get general healthcare guidance
+                    and information through the
+                    Smart Dispensary assistant.
+
+                </p>
+
+
+                <a href="/consult"
+                   class="button">
+
+                    Open Assistant
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             QUICK LINKS
+        =================================== -->
+
+        <section class="quick-links">
+
+            <h2>
+
+                Quick Access
+
+            </h2>
+
+
+            <a href="/appointments">
+
+                🩺 Appointments
+
+            </a>
+
+
+            <a href="/medicines">
+
+                💊 Medicines
+
+            </a>
+
+
+            <a href="/prescriptions">
+
+                📋 Prescriptions
+
+            </a>
+
+
+            <a href="/history">
+
+                📅 History
+
+            </a>
+
+
+            <a href="/emergency">
+
+                🚨 Emergency
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ======================================
+         FOOTER
+    ======================================= -->
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 TIET Smart Dispensary
+
+        </p>
+
+        <p>
+
+            Smart Healthcare Management System
+            for TIET Students
+
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Appointment History | TIET Smart Dispensary
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f7f7;
+
+            color: #333;
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .header {
+
+            background: #c4121c;
+
+            color: white;
+
+            padding: 20px 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.15);
+        }
+
+
+        .logo {
+
+            font-size: 27px;
+
+            font-weight: bold;
+        }
+
+
+        .logout {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            padding: 10px 18px;
+
+            border-radius: 6px;
+
+            transition: 0.2s;
+        }
+
+
+        .logout:hover {
+
+            background:
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* ==========================================
+           MAIN CONTAINER
+        ========================================== */
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1400px;
+
+            margin: 45px auto;
+        }
+
+
+        /* ==========================================
+           PAGE TITLE
+        ========================================== */
+
+        .page-title {
+
+            margin-bottom: 35px;
+        }
+
+
+        .page-title h1 {
+
+            margin: 0;
+
+            color: #c4121c;
+
+            font-size: 42px;
+        }
+
+
+        .page-title p {
+
+            color: #666;
+
+            font-size: 19px;
+
+            margin-top: 12px;
+        }
+
+
+        /* ==========================================
+           HISTORY BOX
+        ========================================== */
+
+        .history-box {
+
+            background: white;
+
+            border-radius: 15px;
+
+            border-top:
+                6px solid #c4121c;
+
+            padding: 35px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+            overflow-x: auto;
+        }
+
+
+        .history-box h2 {
+
+            color: #c4121c;
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
+            font-size: 28px;
+        }
+
+
+        /* ==========================================
+           TABLE
+        ========================================== */
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 750px;
+        }
+
+
+        th {
+
+            background: #c4121c;
+
+            color: white;
+
+            padding: 17px;
+
+            text-align: left;
+
+            font-size: 16px;
+        }
+
+
+        td {
+
+            padding: 17px;
+
+            border-bottom:
+                1px solid #eee;
+
+            font-size: 16px;
+        }
+
+
+        tr:hover td {
+
+            background: #fff5f5;
+        }
+
+
+        /* ==========================================
+           STATUS
+        ========================================== */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            background: #e9f7ed;
+
+            color: #218838;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           EMPTY STATE
+        ========================================== */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+
+        .empty-icon {
+
+            font-size: 65px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .empty h3 {
+
+            color: #c4121c;
+
+            font-size: 27px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .empty p {
+
+            color: #666;
+
+            font-size: 17px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
+
+        .button {
+
+            display: inline-block;
+
+            background: #c4121c;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 14px 25px;
+
+            border-radius: 7px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .button:hover {
+
+            background: #a80f17;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* ==========================================
+           BACK LINK
+        ========================================== */
+
+        .back {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            color: #c4121c;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .back:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .footer {
+
+            margin-top: 70px;
+
+            background: #c4121c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            font-size: 15px;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 650px) {
+
+            .header {
+
+                padding: 18px 5%;
+            }
+
+
+            .logo {
+
+                font-size: 21px;
+            }
+
+
+            .logout {
+
+                font-size: 16px;
+            }
+
+
+            .container {
+
+                width: 92%;
+
+                margin-top: 30px;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 32px;
+            }
+
+
+            .history-box {
+
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER
+    =========================================== -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            🏥 TIET Smart Dispensary
+
+        </div>
+
+
+        <a href="/logout"
+           class="logout">
+
+            Logout
+
+        </a>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="container">
+
+
+        <!-- PAGE TITLE -->
+
+        <section class="page-title">
+
+            <h1>
+                Appointment History
+            </h1>
+
+            <p>
+                View your upcoming and previous
+                TIET dispensary appointments.
+            </p>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             HISTORY
+        =========================================== -->
+
+        <section class="history-box">
+
+            <h2>
+                📅 My Appointments
+            </h2>
+
+
+            {% if appointments %}
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Doctor
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Time
+                            </th>
+
+                            <th>
+                                Reason
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for appointment in appointments %}
+
+                            <tr>
+
+                                <td>
+
+                                    <strong>
+                                        {{ appointment["doctor"] }}
+                                    </strong>
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ appointment["date"] }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ appointment["time"] }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {{ appointment["reason"] }}
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="status">
+
+                                        {{ appointment["status"] }}
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            {% else %}
+
+
+                <!-- NO APPOINTMENTS -->
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        No Appointments Yet
+                    </h3>
+
+                    <p>
+                        You haven't booked any
+                        dispensary appointments yet.
+                    </p>
+
+
+                    <a href="/appointments"
+                       class="button">
+
+                        🩺 Book an Appointment
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <a href="/dashboard"
+           class="back">
+
+            ← Back to Dashboard
+
+        </a>
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 TIET Smart Dispensary
+        </p>
+
+        <p>
+            Smart Healthcare Management System
+            for TIET Students
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
